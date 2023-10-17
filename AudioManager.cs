@@ -4,19 +4,23 @@ using UnityEngine.Pool;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("You can add AudioMixer to your prefab")]
-    private AudioSource sfxSourcePrefab;
+    private static AudioManager Instance;
     private static ObjectPool<AudioSource> sfxSourcePool;
-    
-    private static AudioManager instance;
+    [SerializeField, Tooltip("You can add AudioMixer to your prefab and make prefab 3D")]
+    private AudioSource sfxSourcePrefab;
+
+    [SerializeField] private SoundSO soundSO;
+    public static SoundSO Sounds;
+
+    private static Transform mainCamera;
+
 
     private void Awake()
     {
-        if (instance != null)
-            instance = this;
-        else
-            Destroy(gameObject);
+        Instance = this;
 
+
+        Sounds = soundSO;
 
         sfxSourcePool = new ObjectPool<AudioSource>
             (() =>
@@ -38,28 +42,32 @@ public class AudioManager : MonoBehaviour
             }
             , true, 5, 100
             );
+
+        mainCamera = Camera.main.transform;
     }
+    
 
-
-
-
-    public static void PlaySFX(AudioClip clip, Vector3 playPosition, float volume = 1)
+    public static void PlaySFX(SoundData soundData, Vector3 playPosition = default(Vector3))
     {
+        if (playPosition == default(Vector3))
+            playPosition = mainCamera.position;
+
+
         AudioSource audioSource = sfxSourcePool.Get();
         audioSource.transform.position = playPosition;
-        audioSource.clip = clip;
-        audioSource.volume = volume;
+        audioSource.clip = soundData.clip;
+        audioSource.volume = soundData.volume;
         audioSource.Play();
 
-        float clipLength = clip.length;
+        float clipLength = soundData.clip.length;
 
-        // Return the audio source to the pool after the clip has finished playing
-        instance.StartCoroutine(ReturnToPool(audioSource, clipLength));
+        Instance.StartCoroutine(ReturnToPool(audioSource, clipLength));
     }
-    public static void PlaySFX(AudioClip[] clips, Vector3 playPosition, float volume = 1)
+
+    public static void PlaySFX(SoundData[] soundDataArray, Vector3 playPosition = default(Vector3))
     {
-        AudioClip randomClip = clips[Random.Range(0, clips.Length)];
-        PlaySFX(randomClip, playPosition, volume);
+        SoundData randomSoundData = soundDataArray[Random.Range(0, soundDataArray.Length)];
+        PlaySFX(randomSoundData, playPosition);
     }
     private static IEnumerator ReturnToPool(AudioSource audioSource, float delay)
     {
