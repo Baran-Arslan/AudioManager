@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 namespace iCareGames.Common.Core.AudioSystem
 {
-    public class AudioController : MonoBehaviour
+    public sealed class AudioController : MonoBehaviour
     {
         [SerializeField] private AudioMixerGroup sfxMixer;
         private AudioPool _sfxPool;
