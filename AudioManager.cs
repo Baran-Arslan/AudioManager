@@ -3,7 +3,7 @@ using UnityEngine;
 namespace iCareGames.Common.Core.AudioSystem
 {
     [RequireComponent(typeof(AudioController))]
-    public class AudioManager : MonoBehaviour {
+    public sealed class AudioManager : MonoBehaviour {
         private static AudioController _audioController;
 
         private void Awake() {
