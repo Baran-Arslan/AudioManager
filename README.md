@@ -1,4 +1,5 @@
 # Unity AudioManager Tutorial
+https://www.youtube.com/watch?v=Z96hmkEaYtw
 
 Welcome to the Unity AudioManager Tutorial repository! This project provides a comprehensive guide on creating an AudioManager in Unity, allowing you to have precise control over sound elements in your games. Whether you're a beginner or an experienced developer, this tutorial will enhance your understanding of audio management in Unity.
 
@@ -14,6 +15,8 @@ Welcome to the Unity AudioManager Tutorial repository! This project provides a c
 Follow the steps in the tutorial video to implement the AudioManager in your Unity project. The tutorial covers setting up the AudioManager, implementing object pooling, looping sounds, and more. Feel free to explore the code and customize it to suit your specific project requirements.
 
 ## How to Use
+![image](https://github.com/Baran-Arslan/AudioManager/assets/130396326/5dfe0d62-aa83-46b5-8964-9b66f126d561)
+
 
 1. Clone or download the repository to your local machine.
 2. Open the Unity project in the Unity Editor.
