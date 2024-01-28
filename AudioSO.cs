@@ -1,22 +1,16 @@
 ﻿using UnityEngine;
 
-namespace iCareGames.Common.Core.AudioSystem {
-    [CreateAssetMenu(fileName = "AudioSO", menuName = "iCareGames/AudioSystem/AudioSO")]
+namespace _Common.iCare_AudioManager {
+    [CreateAssetMenu(fileName = "AudioSO", menuName = "iCareGames/Audio", order = 0)]
     public class AudioSO : ScriptableObject {
-        [SerializeField] private AudioClip[] Clips;
-        public AudioClip Clip => Clips[Random.Range(0, Clips.Length)];
-        
-        [Range(0, 1f)]
-        public float DefaultVolume = 1;
-        public float DefaultPitch { get; private set; } = 1f;
-        
-        
-        [Range(0, 256)]
-        public int Priority = 128;
-
-        [Range(0, 0.5f)] 
-        public float VolumeRandomness = 0;
-        [Range(0, 3)]
-        public float PitchRandomness = 0;
+        public AudioClip[] Clips;
+        [Range(0f, 1f)]
+        public float Volume = 1f;
+        [Range(-3f, 3f)]
+        public float Pitch = 1f;
+        [Range(0f, 2.5f)]
+        public float PitchRandomness;
+        [Range(0, 0.8f)]
+        public float VolumeRandomness;
     }
 }
